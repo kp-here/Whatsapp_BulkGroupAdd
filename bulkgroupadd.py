@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 import time
 
 # grp_name = input("\nEnter Group Name :\n")
-grp_name="testing 0006"
+grp_name=input("\nEnter Group Name :\n")
 
 #importing contact names
 l=[]
@@ -54,6 +54,7 @@ for i in l:
     
     box=findbyxpath_noclick("//div[@class='nBIOd tm2tP copyable-area']//div//div[@class='_13NKt copyable-text selectable-text']")
     box.send_keys(i)
+    time.sleep(1)
 
     #wait till exact contact name appears in the list
     try:
@@ -61,17 +62,13 @@ for i in l:
 
     except:
         #if the given contact name is not found in the contact list
-        #crossout the given name and skip to next name
-        # cross=findbyxpath("//div[@class='_3yWey XKmj6 _3N4HJ']//span//span")
-        # back=findbyxpath("//div[@class='_3yWey XKmj6 _3N4HJ']//button[@class='_28-cz']")
-        box.click()
+        #clear the search box
         box.clear()
-
-        #click on the box
-        # box2=findbyxpath("//div[@class='nBIOd tm2tP copyable-area']//div//div[@class='_13NKt copyable-text selectable-text']")
-
+        
+        #add unadded contact to list for final printing
         N.append(i)
-        continue
+    
+    #if exception error does not occur
     else:
         box.send_keys(Keys.ENTER)
 
@@ -89,17 +86,13 @@ print("Contacts not added :")
 for i in N:
     print(i)
 print("------------------------------------------------------------------------------")
-# try:
-    #invite to group - for participants who cannot be added
+
+#invite to group - for participants who cannot be added
 invite=findbyxpath("//div[@class='tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd gjuq5ydh'][contains(text(),'Invite to group')]") 
 
 #'send invite'
 invite=findbyxpath("//div[@class='_165_h _2HL9j']") 
-# except:
-#     time.sleep(5)
-#     driver.quit()
-    
 
 
-
-
+time.sleep(5)
+driver.quit()
