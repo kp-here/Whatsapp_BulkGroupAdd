@@ -57,22 +57,25 @@ for i in l:
 
     #wait till exact contact name appears in the list
     try:
-        wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='emoji-texttt _ccCW FqYAR i0jNr'][contains(text(),'{}')]".format(i))))
+        wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'{}')]".format(i))))
+
     except:
         #if the given contact name is not found in the contact list
         #crossout the given name and skip to next name
         # cross=findbyxpath("//div[@class='_3yWey XKmj6 _3N4HJ']//span//span")
         # back=findbyxpath("//div[@class='_3yWey XKmj6 _3N4HJ']//button[@class='_28-cz']")
-        box.clear()
         box.click()
+        box.clear()
 
         #click on the box
         # box2=findbyxpath("//div[@class='nBIOd tm2tP copyable-area']//div//div[@class='_13NKt copyable-text selectable-text']")
 
         N.append(i)
         continue
+    else:
+        box.send_keys(Keys.ENTER)
 
-    box.send_keys(Keys.ENTER)
+    
 
 #confirm the selected participants [green tick]
 finalize=findbyxpath("//div[@class='_165_h _2HL9j']") 
@@ -81,9 +84,11 @@ finalize=findbyxpath("//div[@class='_165_h _2HL9j']")
 #confirm - 'add participant'
 confirm = findbyxpath("//div[@class='tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd gjuq5ydh'][contains(text(),'Add participant')]") 
 
+print("------------------------------------------------------------------------------")
 print("Contacts not added :")
 for i in N:
     print(i)
+print("------------------------------------------------------------------------------")
 # try:
     #invite to group - for participants who cannot be added
 invite=findbyxpath("//div[@class='tvf2evcx m0h2a7mj lb5m6g5c j7l1k36l ktfrpxia nu7pwgvd gjuq5ydh'][contains(text(),'Invite to group')]") 
